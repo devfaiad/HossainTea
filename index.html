@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tea Haven | Premium Boutique Leaves</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --tea-green: #1b4332;
+            --accent-gold: #d4af37;
+            --soft-cream: #fdfaf5;
+            --dark-leaf: #081c15;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--soft-cream); 
+            color: var(--dark-leaf);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .navbar-brand { font-family: 'Playfair Display', serif; }
+
+        .navbar {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+
+        /* Logo Styling */
+        .brand-logo {
+            height: 80px; /* আপনার লোগোর সাইজ অনুযায়ী অ্যাডজাস্ট করুন */
+            width: auto;
+            object-fit: contain;
+        }
+
+        .hero-banner {
+            background: linear-gradient(rgba(8, 28, 21, 0.5), rgba(8, 28, 21, 0.5)), 
+                        url('https://scontent.fdac45-1.fna.fbcdn.net/v/t39.30808-6/450822687_1008845601036988_7500426218738266805_n.png?stp=dst-png_s960x960&_nc_cat=107&ccb=1-7&_nc_sid=2a1932&_nc_eui2=AeHRlwjoXpriMWKuCamV2cBOodfzjh95Fu6h1_OOH3kW7r_2FwpvhXWWgk5wn8kZLmSwDABYH_x0pS_4egtKOI11&_nc_ohc=ZQrfxLdInX4Q7kNvwGbbUCv&_nc_oc=Adp8DcSwxx0gM5zPus8k86R9y9qR_WgVSigXhCnbdHUkcY5U90fj9ayW1xzTSWs4ITs&_nc_zt=23&_nc_ht=scontent.fdac45-1.fna&_nc_gid=Q12X4gxrRw26xOB1Q_mEOg&_nc_ss=7a3a8&oh=00_Af1VrYk4cLFW_ryfGVGyTea5GzT83sGPSpOPqdxZuqxNbQ&oe=69DC3928');
+            background-size: cover;
+            background-position: center;
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero-title { font-size: 5rem; font-weight: 900; line-height: 1.1; }
+        .hero-badge {
+            background: var(--accent-gold);
+            color: var(--dark-leaf);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .tea-card { 
+            border: none; 
+            border-radius: 24px; 
+            background: #ffffff;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            cursor: pointer;
+        }
+
+        .tea-card:hover { 
+            transform: translateY(-15px); 
+            box-shadow: 0 30px 60px rgba(27, 67, 50, 0.12) !important; 
+        }
+
+        .img-container {
+            overflow: hidden;
+            height: 300px;
+            position: relative;
+        }
+
+        .tea-card img { 
+            transition: transform 0.8s; 
+            object-fit: cover;
+        }
+        .tea-card:hover img { transform: scale(1.1); }
+
+        .price-tag { 
+            font-size: 1.5rem; 
+            color: var(--tea-green); 
+            font-weight: 700;
+        }
+
+        .btn-view {
+            background: var(--tea-green);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 12px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .btn-view:hover { background: var(--dark-leaf); color: white; transform: scale(1.02); }
+
+        .category-header { 
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        .category-header::after {
+            content: "";
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 80px; height: 4px;
+            background: var(--accent-gold);
+        }
+
+        footer { 
+            background: var(--dark-leaf); 
+            color: #d1d1d1; 
+            padding: 80px 0 40px; 
+            border-top-left-radius: 50px;
+            border-top-right-radius: 50px;
+            margin-top: 50px;
+        }
+        .footer-logo-img { height: 60px; margin-bottom: 20px; }
+        
+        .social-circle {
+            width: 45px; height: 45px;
+            background: rgba(255,255,255,0.05);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: 0.3s;
+            color: white;
+            text-decoration: none;
+        }
+        .social-circle:hover { background: var(--accent-gold); color: var(--dark-leaf); }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="index.html">
+            <img src="img/logo.webp" alt="Tea Haven Logo" class="brand-logo me-2">
+           
+        </a>
+        <div class="ms-auto d-none d-lg-block text-muted small">
+            <i class="fas fa-truck me-2"></i> Fast Delivery to <strong>Rajgonj Bazar</strong>
+        </div>
+    </div>
+</nav>
+
+<div class="hero-banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7" data-aos="fade-right">
+                <span class="hero-badge mb-3 d-inline-block">Est. 2026 • Premium Quality</span>
+                <h1 class="hero-title mb-4">Nature's Finest <br><span style="color: var(--accent-gold)">Sip by Sip.</span></h1>
+                <p class="lead mb-5 opacity-75">Sourcing exclusively from high-altitude gardens to bring the soul of tea to your home in Cumilla.</p>
+                <a href="#shop" class="btn btn-light btn-lg px-5 py-3 rounded-pill fw-bold shadow">Start Exploring</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container py-5" id="shop">
+    <h2 class="category-header" data-aos="fade-up">Signature Black</h2>
+    <div class="row mb-5" id="black-tea-list" data-aos="fade-up"></div>
+
+    <h2 class="category-header" data-aos="fade-up">Pure Green</h2>
+    <div class="row mb-5" id="green-tea-list" data-aos="fade-up"></div>
+</div>
+
+<footer>
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-md-6">
+                <img src="img/logo.webp" alt="Tea Haven Logo" class="footer-logo-img">
+                <p class="mb-4 pe-lg-5">We are a boutique tea house dedicated to the art of the perfect brew. Sourcing premium leaves from the best gardens to Rajgonj Bazar, Cumilla. Quality over quantity, always.</p>
+                <div class="social-icons">
+                    <a href="#" class="social-circle"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-circle"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/8801711829628" class="social-circle"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h5 class="text-white mb-4">Visit Our Hub</h5>
+                <p class="mb-3 fs-5"><i class="fas fa-location-dot me-3 text-warning"></i> Rajgonj Bazar, Cumilla, BD</p>
+                <p class="mb-3 fs-5"><i class="fas fa-envelope me-3 text-warning"></i> hossaintea@gmail.com</p>
+                <p class="mb-3 fs-5"><i class="fas fa-phone-alt me-3 text-warning"></i> +880 1711-829628</p>
+            </div>
+        </div>
+        <div class="text-center mt-5 pt-4 border-top border-secondary small">
+            © 2026 Hossain Tea. CRAFTED FOR TEA LOVERS IN CUMILLA.
+        </div>
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 1000, once: true });
+
+    const products = [
+        { id: 1, cat: 'Black', name: 'Royal Assam Gold', price: 24, qty: '250g', img: 'img/ckpzxx37egcgt6w86pfq.webp', desc: 'A rich, malty liquor with a sweet honey aftertaste.' },
+        { id: 2, cat: 'Black', name: 'Imperial Darjeeling', price: 32, qty: '250g', img: 'img/okxj1yw2zuo4ubd9fawf.webp', desc: 'The champagne of teas, harvested during the first flush.' },
+        { id: 3, cat: 'Black', name: 'Midnight Blend', price: 15, qty: '250g', img: 'img/besfkelxfjgcqm87vsxc.webp', desc: 'A strong, robust tea perfect for a splash of milk.' },
+        { id: 4, cat: 'Green', name: 'Zen Jasmine', price: 28, qty: '100g', img: 'img/fcbv8jl0evpbw8tfadin.webp', desc: 'Infused with organic jasmine petals for a serene experience.' },
+        { id: 5, cat: 'Green', name: 'Himalayan Pure', price: 20, qty: '100g', img: 'img/rdts5xshxwfahdgvm6mb.webp', desc: 'Grown in the shadows of the peaks, rich in antioxidants.' },
+        { id: 6, cat: 'Green', name: 'Jade Cloud', price: 28, qty: '100g', img: 'img/of1v2nxrqncddgqwtdbl.webp', desc: 'A fresh, vegetal green tea with a smooth finish.' }        
+    ];
+
+    $(document).ready(function() {
+        products.forEach(p => {
+            const html = `
+                <div class="col-md-6 col-lg-4 mb-5">
+                    <div class="card tea-card h-100 shadow-sm" onclick="viewProduct(${p.id})">
+                        <div class="img-container">
+                            <img src="${p.img}" class="card-img-top h-100 w-100" alt="${p.name}">
+                        </div>
+                        <div class="card-body p-4">
+                            <h4 class="fw-bold mb-1">${p.name}</h4>
+                            <p class="text-muted small mb-3">${p.qty} Heritage Pack</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="price-tag">$${p.price}</span>
+                                <button class="btn btn-view px-4">Buy Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            if(p.cat === 'Black') $('#black-tea-list').append(html);
+            else $('#green-tea-list').append(html);
+        });
+    });
+
+    function viewProduct(id) {
+        const p = products.find(x => x.id === id);
+        localStorage.setItem('selectedProduct', JSON.stringify(p));
+        window.location.href = 'product.html';
+    }
+</script>
+</body>
+</html>
