@@ -3,91 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout | Tea Haven</title>
+    <title>Checkout | Hossain Tea</title>
+    <link rel="icon" type="image/webp" href="img/logo.webp">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #f4f7f4; color: #1b4332; }
-        .checkout-card { border: none; border-radius: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.05); }
-        .summary-box { background: #fff; border-radius: 20px; border: 2px solid #e9ecef; }
-        .form-control, .form-select { border-radius: 12px; padding: 12px; border: 2px solid #eee; }
-        .form-control:focus { border-color: #1b4332; box-shadow: none; }
-        .btn-confirm { background: #1b4332; color: white; border-radius: 50px; font-weight: 700; padding: 15px; border: none; transition: 0.3s; }
-        .btn-confirm:hover { background: #081c15; transform: translateY(-2px); }
+        :root { --tea-green: #1b4332; --accent-gold: #d4af37; --soft-cream: #fdfaf5; --dark-leaf: #081c15; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--soft-cream); color: var(--dark-leaf); }
+        .checkout-card { border: none; border-radius: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.05); background: #fff; }
+        .summary-box { background: var(--soft-cream); border-radius: 20px; border: 2px solid #e9ecef; padding: 25px; }
+        .brand-logo { height: 50px; width: auto; }
+        .cart-item-row { border-bottom: 1px dashed #ddd; padding: 10px 0; font-size: 0.95rem; }
+        .btn-confirm { background: var(--tea-green); color: white; border-radius: 50px; font-weight: 700; padding: 15px; border: none; width: 100%; transition: 0.3s; text-transform: uppercase; }
+        .btn-confirm:hover { background: var(--dark-leaf); transform: translateY(-2px); color: white; }
     </style>
 </head>
 <body>
 
+<nav class="navbar navbar-expand-lg sticky-top bg-white border-bottom py-2">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <img src="img/logo.webp" alt="Hossain Tea Logo" class="brand-logo">
+        </a>
+    </div>
+</nav>
+
 <div class="container py-5">
-    <div class="row justify-content-center">
+    <div class="row g-5 justify-content-center">
         <div class="col-lg-10">
             <div class="card checkout-card p-4 p-md-5">
                 <div class="row g-5">
                     
                     <div class="col-md-5 order-md-2">
                         <h4 class="fw-bold mb-4">Order Summary</h4>
-                        <div class="summary-box p-4">
-                            <div class="d-flex justify-content-between mb-2">
-                                <span id="item-details" class="fw-bold">Tea Name</span>
-                                <span id="subtotal-val">৳0.00</span>
-                            </div>
-                            <p class="text-muted small">Quantity: <span id="qty-val">0</span> | Pack: <span id="weight-val">0g</span></p>
+                        <div class="summary-box">
+                            <div id="cart-list"></div>
                             <hr>
                             <div class="d-flex justify-content-between mb-2">
-                                <span>Shipping Fee</span>
-                                <span id="shipping-val">৳0</span>
+                                <span>Subtotal</span>
+                                <span id="display-subtotal" class="fw-bold">৳0.00</span>
                             </div>
-                            <div class="d-flex justify-content-between mt-3">
-                                <h5 class="fw-bold">Total Payable</h5>
-                                <h5 class="fw-bold text-success" id="grand-total">৳0.00</h5>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Shipping Fee</span>
+                                <span id="display-shipping" class="text-danger fw-bold">৳0.00</span>
+                            </div>
+                            <div class="d-flex justify-content-between mt-3 pt-3 border-top">
+                                <h5 class="fw-bold">Grand Total</h5>
+                                <h5 class="fw-bold text-success" id="display-grand-total">৳0.00</h5>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-md-7 order-md-1">
                         <h2 class="fw-bold mb-4">Shipping Details</h2>
-                        
-                        <form action="https://api.web3forms.com/submit" method="POST" id="orderForm">
-                            <input type="hidden" name="access_key" value="683e9593-65a1-4590-9bd3-b7153a2b9557">
-                            <input type="hidden" name="subject" value="New Tea Order Received">
-                            <input type="hidden" name="from_name" value="Tea Haven Shop">
+                        <form id="orderForm" action="https://script.google.com/macros/s/AKfycbxAyrETZEBk2jD-Vg5afG-2Obn_BauBlpowvzuDqLHqOdEzc7tG_d4i6rWtxW9QMzIL/exec" method="POST">
+                            
                             <input type="hidden" name="Product_Name" id="hidden-p-name">
                             <input type="hidden" name="Order_Qty" id="hidden-p-qty">
                             <input type="hidden" name="Order_Weight" id="hidden-p-weight">
                             <input type="hidden" name="Total_Price" id="hidden-p-total">
 
                             <div class="mb-3">
-                                <label class="form-label fw-600">Full Name</label>
-                                <input type="text" name="Customer_Name" class="form-control" placeholder="Enter your full name" required>
+                                <label class="form-label fw-bold small">FULL NAME</label>
+                                <input type="text" name="Customer_Name" class="form-control" placeholder="আপনার নাম" required>
                             </div>
-                            
                             <div class="mb-3">
-                                <label class="form-label fw-600">Phone Number</label>
-                                <input type="tel" name="Customer_Phone" class="form-control" placeholder="+880 1XXX XXXXXX" required>
+                                <label class="form-label fw-bold small">PHONE NUMBER</label>
+                                <input type="tel" name="Customer_Phone" class="form-control" placeholder="01XXXXXXXXX" required>
                             </div>
-
                             <div class="mb-3">
-                                <label class="form-label fw-600">Delivery Location</label>
-                                <select id="location-select" name="Shipping_Location" class="form-select border-2" required>
-                                    <option value="" selected disabled>Select your location</option>
+                                <label class="form-label fw-bold small">LOCATION</label>
+                                <select id="location-select" name="Shipping_Location" class="form-select" required>
+                                    <option value="" selected disabled>সিলেক্ট করুন</option>
                                     <option value="Inside Cumilla">Inside Cumilla (৳50)</option>
                                     <option value="Outside Cumilla">Outside Cumilla (৳150)</option>
                                 </select>
                             </div>
-
                             <div class="mb-4">
-                                <label class="form-label fw-600">Full Address</label>
-                                <textarea name="Customer_Address" class="form-control" rows="3" placeholder="House no, Area, etc." required></textarea>
+                                <label class="form-label fw-bold small">FULL ADDRESS</label>
+                                <textarea name="Customer_Address" class="form-control" rows="3" placeholder="বিস্তারিত ঠিকানা লিখুন" required></textarea>
                             </div>
 
-                            <button type="submit" class="btn btn-confirm w-100 shadow">
-                                <i class="fas fa-paper-plane me-2"></i> Confirm Order
-                            </button>
-                            
-                            <div class="text-center mt-3">
-                                <a href="index.html" class="text-decoration-none text-muted small">Cancel and return to shop</a>
-                            </div>
+                            <button type="submit" id="submitBtn" class="btn btn-confirm">Confirm Order</button>
                         </form>
                     </div>
 
@@ -99,56 +97,73 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function() {
-        // Load product from localStorage
-        const product = JSON.parse(localStorage.getItem('selectedProduct'));
-        
-        // If no product, send back to shop
-        if(!product) { 
-            window.location.href = 'index.html'; 
-            return; 
-        }
+   $(document).ready(function() {
+    // ১. কার্ট থেকে ডাটা গেট করা
+    let cart = JSON.parse(localStorage.getItem('teaCart')) || [];
+    if(cart.length === 0) { 
+        window.location.href = 'index.html'; 
+        return; 
+    }
 
-        // Initial Values
-        let subtotal = parseFloat(product.finalSubtotal);
-        $('#item-details').text(product.name);
-        $('#subtotal-val').text('৳' + subtotal.toFixed(2));
-        $('#qty-val').text(product.finalQty);
-        $('#weight-val').text(product.finalWeight);
-        
-        // Pre-fill hidden fields for Web3Forms
-        $('#hidden-p-name').val(product.name);
-        $('#hidden-p-qty').val(product.finalQty);
-        $('#hidden-p-weight').val(product.finalWeight);
+    let cartSubtotal = 0;
+    let pNames = [];
 
-        function calculateGrandTotal() {
-            const location = $('#location-select').val();
-            let shippingCost = 0;
-            
-            if(location === 'Inside Cumilla') shippingCost = 50;
-            else if(location === 'Outside Cumilla') shippingCost = 150;
+    // ২. কার্টের আইটেমগুলো লুপ করা এবং ডিসপ্লে করা
+    cart.forEach(item => {
+        let itemTotal = parseFloat(item.itemTotal) || 0;
+        cartSubtotal += itemTotal;
+        pNames.push(`${item.name} (${item.weight} x ${item.qty})`);
 
-            $('#shipping-val').text('৳' + shippingCost);
-            
-            // Grand Total (Converting shipping TK to USD roughly for display)
-            let grandTotal = subtotal + (shippingCost / 110); 
-            let finalPriceStr = '৳' + grandTotal.toFixed(2);
-            
-            $('#grand-total').text(finalPriceStr);
-            
-            // This is the value that will go to Google Sheet
-            $('#hidden-p-total').val(finalPriceStr); 
-        }
-
-        // Listen for location change
-        $('#location-select').on('change', calculateGrandTotal);
-        
-        // Form submission handling
-        $('#orderForm').on('submit', function() {
-            // Optional: You can clear localStorage here if you want
-            // localStorage.removeItem('selectedProduct');
-        });
+        $('#cart-list').append(`
+            <div class="cart-item-row d-flex justify-content-between">
+                <span>${item.name} (${item.weight} x ${item.qty})</span>
+                <span class="fw-bold">৳${itemTotal.toFixed(2)}</span>
+            </div>
+        `);
     });
+
+    // ৩. পেজ লোড হওয়ার সাথে সাথেই ভ্যালুগুলো ইনিশিয়ালাইজ করা
+    function initDisplay() {
+        $('#display-subtotal').text('৳' + cartSubtotal.toFixed(2));
+        $('#display-shipping').text('৳0.00');
+        $('#display-grand-total').text('৳' + cartSubtotal.toFixed(2)); // শুরুতে শিপিং ছাড়া টোটাল দেখাবে
+        
+        // গুগল শিটের জন্য প্রাথমিক ডাটা
+        $('#hidden-p-name').val(pNames.join(", "));
+        $('#hidden-p-total').val('৳' + cartSubtotal.toFixed(2));
+    }
+
+    initDisplay();
+
+    // ৪. লোকেশন চেঞ্জ হলে শিপিং এবং গ্র্যান্ড টোটাল আপডেট
+    function calculateFinal() {
+        const location = $('#location-select').val();
+        let shipping = 0;
+
+        if(location === 'Inside Cumilla') {
+            shipping = 50;
+        } else if(location === 'Outside Cumilla') {
+            shipping = 150;
+        }
+
+        let grandTotal = cartSubtotal + shipping;
+
+        // ডিসপ্লে আপডেট
+        $('#display-shipping').text('৳' + shipping.toFixed(2));
+        $('#display-grand-total').text('৳' + grandTotal.toFixed(2));
+        
+        // গুগল শিটে পাঠানোর জন্য টোটাল আপডেট
+        $('#hidden-p-total').val('৳' + grandTotal.toFixed(2));
+    }
+
+    // ড্রপডাউন চেঞ্জ ইভেন্ট
+    $('#location-select').on('change', calculateFinal);
+
+    // ৫. ফর্ম সাবমিট
+    $('#orderForm').on('submit', function() {
+        $('#submitBtn').prop('disabled', true).html('<i class="fas fa-spinner fa-spin me-2"></i> Processing...');
+    });
+});
 </script>
 </body>
 </html>
