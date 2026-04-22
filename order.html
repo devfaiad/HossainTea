@@ -7,7 +7,9 @@
     <link rel="icon" type="image/webp" href="img/logo.webp">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    
     <style>
         :root { --tea-green: #1b4332; --accent-gold: #d4af37; --soft-cream: #fdfaf5; --dark-leaf: #081c15; }
         body { font-family: 'Inter', sans-serif; background-color: var(--soft-cream); color: var(--dark-leaf); }
@@ -57,11 +59,8 @@
 
                     <div class="col-md-7 order-md-1">
                         <h2 class="fw-bold mb-4">Shipping Details</h2>
-                        <form id="orderForm" action="https://script.google.com/macros/s/AKfycbxAyrETZEBk2jD-Vg5afG-2Obn_BauBlpowvzuDqLHqOdEzc7tG_d4i6rWtxW9QMzIL/exec" method="POST">
-                            
+                        <form id="orderForm">
                             <input type="hidden" name="Product_Name" id="hidden-p-name">
-                            <input type="hidden" name="Order_Qty" id="hidden-p-qty">
-                            <input type="hidden" name="Order_Weight" id="hidden-p-weight">
                             <input type="hidden" name="Total_Price" id="hidden-p-total">
 
                             <div class="mb-3">
@@ -96,24 +95,20 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
-   $(document).ready(function() {
-    // ১. কার্ট থেকে ডাটা গেট করা
+$(document).ready(function() {
     let cart = JSON.parse(localStorage.getItem('teaCart')) || [];
-    if(cart.length === 0) { 
-        window.location.href = 'index.html'; 
-        return; 
-    }
+    if(cart.length === 0) { window.location.href = 'index.html'; return; }
 
     let cartSubtotal = 0;
     let pNames = [];
 
-    // ২. কার্টের আইটেমগুলো লুপ করা এবং ডিসপ্লে করা
     cart.forEach(item => {
         let itemTotal = parseFloat(item.itemTotal) || 0;
         cartSubtotal += itemTotal;
         pNames.push(`${item.name} (${item.weight} x ${item.qty})`);
-
         $('#cart-list').append(`
             <div class="cart-item-row d-flex justify-content-between">
                 <span>${item.name} (${item.weight} x ${item.qty})</span>
@@ -122,46 +117,67 @@
         `);
     });
 
-    // ৩. পেজ লোড হওয়ার সাথে সাথেই ভ্যালুগুলো ইনিশিয়ালাইজ করা
     function initDisplay() {
         $('#display-subtotal').text('৳' + cartSubtotal.toFixed(2));
         $('#display-shipping').text('৳0.00');
-        $('#display-grand-total').text('৳' + cartSubtotal.toFixed(2)); // শুরুতে শিপিং ছাড়া টোটাল দেখাবে
-        
-        // গুগল শিটের জন্য প্রাথমিক ডাটা
+        $('#display-grand-total').text('৳' + cartSubtotal.toFixed(2));
         $('#hidden-p-name').val(pNames.join(", "));
         $('#hidden-p-total').val('৳' + cartSubtotal.toFixed(2));
     }
-
     initDisplay();
 
-    // ৪. লোকেশন চেঞ্জ হলে শিপিং এবং গ্র্যান্ড টোটাল আপডেট
-    function calculateFinal() {
-        const location = $('#location-select').val();
-        let shipping = 0;
-
-        if(location === 'Inside Cumilla') {
-            shipping = 50;
-        } else if(location === 'Outside Cumilla') {
-            shipping = 150;
-        }
-
+    $('#location-select').on('change', function() {
+        const location = $(this).val();
+        let shipping = (location === 'Inside Cumilla') ? 50 : 150;
         let grandTotal = cartSubtotal + shipping;
-
-        // ডিসপ্লে আপডেট
         $('#display-shipping').text('৳' + shipping.toFixed(2));
         $('#display-grand-total').text('৳' + grandTotal.toFixed(2));
-        
-        // গুগল শিটে পাঠানোর জন্য টোটাল আপডেট
         $('#hidden-p-total').val('৳' + grandTotal.toFixed(2));
-    }
+    });
 
-    // ড্রপডাউন চেঞ্জ ইভেন্ট
-    $('#location-select').on('change', calculateFinal);
+    // ৫. AJAX এর মাধ্যমে ফর্ম সাবমিট
+    $('#orderForm').on('submit', function(e) {
+        e.preventDefault(); // ডিফল্ট রিডাইরেক্ট বন্ধ করা
 
-    // ৫. ফর্ম সাবমিট
-    $('#orderForm').on('submit', function() {
         $('#submitBtn').prop('disabled', true).html('<i class="fas fa-spinner fa-spin me-2"></i> Processing...');
+
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxAyrETZEBk2jD-Vg5afG-2Obn_BauBlpowvzuDqLHqOdEzc7tG_d4i6rWtxW9QMzIL/exec';
+        
+        // ফর্ম ডাটা সেন্ড করা
+        $.ajax({
+            url: scriptURL,
+            method: "POST",
+            data: new FormData(this),
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                // ১. কার্ট ক্লিয়ার করা
+                localStorage.removeItem('teaCart');
+
+                // ২. সাকসেস পপআপ দেখানো
+                Swal.fire({
+                    icon: 'success',
+                    title: 'অর্ডার সফল হয়েছে!',
+                    text: 'আমরা শীঘ্রই আপনার সাথে যোগাযোগ করবো।',
+                    confirmButtonText: 'ঠিক আছে',
+                    confirmButtonColor: '#1b4332',
+                    allowOutsideClick: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = 'index.html'; // হোমপেজে ফেরত পাঠানো
+                    }
+                });
+            },
+            error: function(err) {
+                $('#submitBtn').prop('disabled', false).text('Confirm Order');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'দুঃখিত!',
+                    text: 'অর্ডার সাবমিট করতে সমস্যা হয়েছে। আবার চেষ্টা করুন।',
+                    confirmButtonColor: '#1b4332'
+                });
+            }
+        });
     });
 });
 </script>

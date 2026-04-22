@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hossain Tea</title>
+    <title>Hossain Tea | Premium Tea Supply</title>
     <link rel="icon" type="image/webp" href="img/logo.webp">
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -28,45 +28,36 @@
 
         h1, h2, h3, .navbar-brand { font-family: 'Playfair Display', serif; }
 
-        /* --- Navbar Styles --- */
         .navbar {
             backdrop-filter: blur(10px);
             background: rgba(255, 255, 255, 0.9);
             border-bottom: 1px solid rgba(0,0,0,0.05);
-            padding: 5px 0; /* নেভবারের প্যাডিং কমানো হয়েছে */
-            min-height: 70px; /* একটি স্ট্যান্ডার্ড উচ্চতা নির্ধারণ */
+            padding: 5px 0;
+            min-height: 70px;
         }
 
         .brand-logo {
-            height: 50px; /* লোগোর হাইট কমিয়ে ৬০ থেকে ৫০ করা হয়েছে */
+            height: 50px;
             width: auto;
             object-fit: contain;
             display: block;
         }
 
-        /* --- Hero Banner Section --- */
         .hero-banner {
             background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('img/banner.webp');
             background-size: cover;
             background-position: center center;
-            background-repeat: no-repeat;
             height: 80vh;
             width: 100%;
         }
 
         @media screen and (max-width: 767px) {
-            body .hero-banner {
+            .hero-banner {
                 background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('img/banner2.webp') !important;
-                background-position: center center;
-                background-size: cover;
                 height: 50vh;
-            }
-            .brand-logo {
-                height: 40px; /* মোবাইলে লোগো আরও কিছুটা ছোট */
             }
         }
 
-        /* --- Product Card Styles --- */
         .tea-card { 
             border: none; 
             border-radius: 24px; 
@@ -82,23 +73,11 @@
             box-shadow: 0 30px 60px rgba(27, 67, 50, 0.12) !important; 
         }
 
-        .img-container {
-            overflow: hidden;
-            height: 280px;
-            position: relative;
-        }
-
-        .tea-card img { 
-            transition: transform 0.8s; 
-            object-fit: cover;
-        }
+        .img-container { height: 280px; overflow: hidden; position: relative; }
+        .tea-card img { transition: transform 0.8s; object-fit: cover; }
         .tea-card:hover img { transform: scale(1.1); }
 
-        .price-tag { 
-            font-size: 1.4rem; 
-            color: var(--tea-green); 
-            font-weight: 700;
-        }
+        .price-tag { font-size: 1.4rem; color: var(--tea-green); font-weight: 700; }
 
         .btn-view {
             background: var(--tea-green);
@@ -109,7 +88,7 @@
             font-weight: 600;
             transition: 0.3s;
         }
-        .btn-view:hover { background: var(--dark-leaf); color: white; transform: scale(1.02); }
+        .btn-view:hover { background: var(--dark-leaf); color: white; transform: scale(1.05); }
 
         .category-header { 
             font-size: 2.2rem;
@@ -133,19 +112,13 @@
             border-top-right-radius: 40px;
             margin-top: 50px;
         }
-        .footer-logo-img { height: 50px; margin-bottom: 20px; }
-        
         .social-circle {
             width: 40px; height: 40px;
             background: rgba(255,255,255,0.05);
             display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            margin-right: 10px;
-            transition: 0.3s;
-            color: white;
-            text-decoration: none;
+            align-items: center; justify-content: center;
+            border-radius: 50%; margin-right: 10px;
+            color: white; text-decoration: none; transition: 0.3s;
         }
         .social-circle:hover { background: var(--accent-gold); color: var(--dark-leaf); }
     </style>
@@ -183,23 +156,21 @@
     <div class="container">
         <div class="row g-5">
             <div class="col-md-6">
-                <img src="img/logo.webp" alt="Hossain Tea Logo" class="footer-logo-img">
-                <p class="mb-4 pe-lg-5">We are a tea house dedicated to the art of the perfect brew. Sourcing premium leaves from the best gardens to Rajgonj Bazar, Cumilla.</p>
+                <img src="img/logo.webp" alt="Hossain Tea" style="height: 50px; margin-bottom: 20px;">
+                <p class="mb-4 pe-lg-5">Sourcing premium leaves from the best gardens to Rajgonj Bazar, Cumilla.</p>
                 <div class="social-icons">
                     <a href="https://www.facebook.com/Hossainteasupply/" class="social-circle"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social-circle"><i class="fab fa-instagram"></i></a>
                     <a href="https://wa.me/8801711829628" class="social-circle"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
             <div class="col-md-6">
-                <h5 class="text-white mb-4">Visit Our Hub</h5>
+                <h5 class="text-white mb-4">Contact Info</h5>
                 <p class="mb-2"><i class="fas fa-location-dot me-3 text-warning"></i> Rajgonj Bazar, Cumilla, BD</p>
-                <p class="mb-2"><i class="fas fa-envelope me-3 text-warning"></i> hossaintea@gmail.com</p>
                 <p class="mb-2"><i class="fas fa-phone-alt me-3 text-warning"></i> +880 1711-829628</p>
             </div>
         </div>
         <div class="text-center mt-5 pt-4 border-top border-secondary small opacity-50">
-            © 2026 Hossain Tea. CRAFTED FOR TEA LOVERS IN CUMILLA.
+            © 2026 Hossain Tea.
         </div>
     </div>
 </footer>
@@ -215,61 +186,63 @@
         { id: 3, cat: 'Black', name: 'Premium Of Clone Tea', price: 200, qty: '250g', img: 'img/besfkelxfjgcqm87vsxc.webp' },
         { id: 4, cat: 'Green', name: 'Zen Jasmine', price: 150, qty: '100g', img: 'img/fcbv8jl0evpbw8tfadin.webp' },
         { id: 5, cat: 'Green', name: 'Himalayan Pure', price: 250, qty: '100g', img: 'img/rdts5xshxwfahdgvm6mb.webp' },
-        { id: 6, cat: 'Green', name: 'Jade Cloud', price: 300, qty: '100g', img: 'img/of1v2nxrqncddgqwtdbl.webp' }        
+        { id: 6, cat: 'Green', name: 'Jade Cloud', price: 300, qty: '100g', img: 'img/of1v2nxrqncddgqwtdbl.webp' }         
     ];
 
     $(document).ready(function() {
-    updateCartCount(); // পেজ লোড হলে কার্ট সংখ্যা আপডেট করবে
+        updateCartCount();
 
-    products.forEach(p => {
-        const html = `
-            <div class="col-md-6 col-lg-4 mb-5">
-                <div class="card tea-card h-100 shadow-sm">
-                    <div class="img-container" onclick="goToDetails(${p.id})">
-                        <img src="${p.img}" class="card-img-top h-100 w-100" alt="${p.name}">
-                    </div>
-                    <div class="card-body p-4">
-                        <h4 class="fw-bold mb-1">${p.name}</h4>
-                        <p class="text-muted small mb-3">${p.qty} Heritage Pack</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="price-tag">৳${p.price}</span>
-                            <button class="btn btn-view" onclick="addToCart(${p.id})">Add to Cart</button>
+        products.forEach(p => {
+            const html = `
+                <div class="col-md-6 col-lg-4 mb-5">
+                    <div class="card tea-card h-100 shadow-sm">
+                        <div class="img-container" onclick="goToDetails(${p.id})">
+                            <img src="${p.img}" class="card-img-top h-100 w-100" alt="${p.name}">
+                        </div>
+                        <div class="card-body p-4">
+                            <h4 class="fw-bold mb-1">${p.name}</h4>
+                            <p class="text-muted small mb-3">${p.qty} Heritage Pack</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="price-tag">৳${p.price}</span>
+                                <button class="btn btn-view" onclick="addToCart(${p.id})">Add to Cart</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>`;
-        if(p.cat === 'Black') $('#black-tea-list').append(html);
-        else $('#green-tea-list').append(html);
+                </div>`;
+            if(p.cat === 'Black') $('#black-tea-list').append(html);
+            else $('#green-tea-list').append(html);
+        });
     });
-});
 
-function addToCart(id) {
-    let cart = JSON.parse(localStorage.getItem('teaCart')) || [];
-    const product = products.find(x => x.id === id);
-    
-    // চেক করা হচ্ছে প্রোডাক্টটি অলরেডি কার্টে আছে কি না
-    const existing = cart.find(item => item.id === id);
-    if(existing) {
-        existing.qty += 1;
-    } else {
-        cart.push({...product, qty: 1, weight: '250g'});
+    function addToCart(id) {
+        let cart = JSON.parse(localStorage.getItem('teaCart')) || [];
+        const product = products.find(x => x.id === id);
+        const weight = product.cat === 'Green' ? '100g' : '250g';
+        const cartId = product.id + '-' + weight;
+
+        const existing = cart.find(item => item.cartId === cartId);
+        if(existing) {
+            existing.qty += 1;
+            existing.itemTotal = existing.qty * existing.price;
+        } else {
+            cart.push({...product, cartId: cartId, qty: 1, weight: weight, itemTotal: product.price});
+        }
+        
+        localStorage.setItem('teaCart', JSON.stringify(cart));
+        updateCartCount();
+        alert(product.name + " কার্টে যোগ করা হয়েছে!");
     }
-    
-    localStorage.setItem('teaCart', JSON.stringify(cart));
-    updateCartCount();
-    alert(product.name + " কার্টে যোগ করা হয়েছে!");
-}
 
-function updateCartCount() {
-    let cart = JSON.parse(localStorage.getItem('teaCart')) || [];
-    $('#cart-count').text(cart.length);
-}
+    function updateCartCount() {
+        let cart = JSON.parse(localStorage.getItem('teaCart')) || [];
+        $('#cart-count').text(cart.length);
+    }
 
-function goToDetails(id) {
-    const p = products.find(x => x.id === id);
-    localStorage.setItem('selectedProduct', JSON.stringify(p));
-    window.location.href = 'product.html';
-}
+    function goToDetails(id) {
+        const p = products.find(x => x.id === id);
+        localStorage.setItem('selectedProduct', JSON.stringify(p));
+        window.location.href = 'product.html';
+    }
 </script>
 </body>
 </html>
